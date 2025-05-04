@@ -7,5 +7,5 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss()
   ],
-  base:process.env.VITE_Base_PATH || "/React-TODO-App"
+  base:'./'
 })
