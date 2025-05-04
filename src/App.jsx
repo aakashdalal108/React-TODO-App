@@ -9,7 +9,7 @@ function App() {
   const [todos, settodos] = useState([])
 
   useEffect(() => {
-    let getFromLS = JSON.parse(localStorage.getItem("todos"))
+    let getFromLS = JSON.parse(localStorage.getItem("todos")) || []
     settodos(getFromLS)
   }, [])
 
@@ -47,17 +47,30 @@ function App() {
 
 
   }
+  // const handleEdit = (e) => {
+  //   let id = e.target.name
+  //   let editedTodo = todos.filter(e => {
+  //     return e.id == id
+  //   })
+  //   settask(editedTodo[0].task)
+  //   let newTodos = todos.filter(e => {
+  //     return e.id !== id
+  //   })
+  //   settodos(newTodos)
+  //   ToLocalSave()
+  // }
   const handleEdit = (e) => {
     let id = e.target.name
-    let editedTodo = todos.filter(e => {
-      return e.id == id
-    })
-    settask(editedTodo[0].task)
-    let newTodos = todos.filter(e => {
-      return e.id !== id
-    })
+    let editedTodo = todos.find(todo => todo.id === id)
+  
+    if (!editedTodo) return
+  
+    settask(editedTodo.task)
+  
+    let newTodos = todos.filter(todo => todo.id !== id)
     settodos(newTodos)
     ToLocalSave()
+
   }
   const handleCheckBox = (e) => {
     let id = e.target.name
